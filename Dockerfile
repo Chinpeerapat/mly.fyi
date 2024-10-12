@@ -12,7 +12,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
 FROM base AS build
-RUN --mount=type=cache,id=pnpm-cache,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=${RAILWAY_SERVICE_ID}-pnpm-cache,target=/pnpm/store pnpm install --frozen-lockfile
 
 COPY . .
 RUN pnpm run build
